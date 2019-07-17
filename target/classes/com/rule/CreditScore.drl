@@ -1,0 +1,22 @@
+package rules
+
+import com.kkalletla.model.UserDetails;
+
+rule "More Credit Score"
+    when
+        userDetailsObject : UserDetails(creditScore > 650)
+    then
+        userDetailsObject.setStatus("Accepted");
+        update(userDetailsObject);
+        System.out.println("Credit Score Less than 500. Can't Accept.");
+end
+
+
+rule "Less Credit Score"
+    when
+        userDetailsObject : UserDetails(creditScore < 500)
+    then
+        userDetailsObject.setStatus("Rejected");
+        update(userDetailsObject);
+        System.out.println("Credit Score Less than 500. Can't Accept.");
+end
